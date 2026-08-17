@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101827" />
+    <title>63_ia (beta)</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark"><span></span><span></span><span></span></div>
+          <div>
+            <strong>63_ia</strong>
+            <small>beta · local ai</small>
+          </div>
+        </div>
+
+        <div class="workspace-switcher">
+          <span class="workspace-dot"></span>
+          <div>
+            <small>Workspace</small>
+            <strong>Fedora Workstation</strong>
+          </div>
+          <span class="chevron">⌄</span>
+        </div>
+
+        <nav class="side-nav" aria-label="Navegação principal">
+          <p class="nav-label">Operação</p>
+          <button class="nav-item active" data-section="overview"><span class="nav-icon">◈</span> Visão geral</button>
+          <button class="nav-item" data-section="chat"><span class="nav-icon">◇</span> Chat local <span class="nav-badge">0</span></button>
+          <button class="nav-item" data-section="models"><span class="nav-icon">▦</span> Modelos</button>
+          <button class="nav-item" data-section="metrics"><span class="nav-icon">⌁</span> Métricas</button>
+          <button class="nav-item" data-section="knowledge"><span class="nav-icon">▤</span> Arquivos &amp; Obsidian</button>
+          <button class="nav-item" data-section="web"><span class="nav-icon">◎</span> Pesquisa web</button>
+          <p class="nav-label second">Ferramentas</p>
+          <button class="nav-item" data-section="terminal"><span class="nav-icon">›_</span> Terminal seguro <span class="lock">▣</span></button>
+          <button class="nav-item" data-section="settings"><span class="nav-icon">⚙</span> Configurações</button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="security-note">
+            <div class="security-icon">✓</div>
+            <div>
+              <strong>Execução local</strong>
+              <span>Seus dados permanecem nesta máquina.</span>
+            </div>
+          </div>
+          <div class="version-row"><span>v0.1.0-beta</span><span class="status-dot green"></span><span>Serviço ativo</span></div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="breadcrumbs"><span>Workspace</span><b>/</b><strong id="page-breadcrumb">Visão geral</strong></div>
+          <div class="topbar-actions">
+            <button class="icon-button" id="refresh-button" title="Atualizar status">↻</button>
+            <button class="icon-button" id="theme-button" title="Alternar contraste">◐</button>
+            <div class="avatar" title="Execução local">FL</div>
+          </div>
+        </header>
+
+        <div class="content-wrap">
+          <section class="page-section active" id="section-overview">
+            <div class="page-heading">
+              <div>
+                <p class="eyebrow">PAINEL DE CONTROLE LOCAL</p>
+                <h1>Bom dia, <span>operador.</span></h1>
+                <p class="heading-copy">Seu ecossistema de IA local está pronto para operar com transparência, velocidade e controle.</p>
+              </div>
+              <div class="heading-meta"><span class="live-dot"></span><span id="last-updated">Verificando serviços…</span></div>
+            </div>
+
+            <div class="hero-grid">
+              <article class="hero-card">
+                <div class="hero-glow"></div>
+                <div class="hero-content">
+                  <div class="hero-topline"><span class="pill purple">LLAMA.CPP</span><span class="hero-running"><i></i> Execução local</span></div>
+                  <h2>Inteligência que<br /><em>fica com você.</em></h2>
+                  <p>Converse com modelos GGUF quantizados e acompanhe cada recurso da sua máquina em um só lugar.</p>
+                  <button class="primary-button" data-section-link="chat">Abrir chat <span>→</span></button>
+                </div>
+                <div class="hero-grid-lines"></div>
+                <div class="hero-orb orb-one"></div><div class="hero-orb orb-two"></div>
+              </article>
+
+              <div class="stat-stack">
+                <article class="stat-card">
+                  <div class="stat-icon cyan">⌁</div><div><span>Servidor llama.cpp</span><strong id="llama-status">—</strong><small id="llama-latency">Aguardando leitura</small></div><span class="status-dot" id="llama-dot"></span>
+                </article>
+                <article class="stat-card">
+                  <div class="stat-icon violet">▦</div><div><span>Modelos disponíveis</span><strong id="model-count">0</strong><small>arquivos GGUF detectados</small></div><span class="stat-arrow">→</span>
+                </article>
+                <article class="stat-card">
+                  <div class="stat-icon amber">›_</div><div><span>Terminal seguro</span><strong id="terminal-status">Desabilitado</strong><small>modo allowlist</small></div><span class="status-dot" id="terminal-dot"></span>
+                </article>
+              </div>
+            </div>
+
+            <div class="section-title-row"><div><p class="eyebrow">ACESSO RÁPIDO</p><h2>Operação centralizada</h2></div><button class="text-button" data-section-link="settings">Ver configurações →</button></div>
+            <div class="quick-grid">
+              <button class="quick-card" data-section-link="chat"><div class="quick-icon purple-bg">◇</div><div><strong>Iniciar conversa</strong><span>Interaja com o modelo ativo</span></div><b>↗</b></button>
+              <button class="quick-card" data-section-link="models"><div class="quick-icon blue-bg">▦</div><div><strong>Gerenciar modelos</strong><span>Veja arquivos GGUF locais</span></div><b>↗</b></button>
+              <button class="quick-card" data-section-link="terminal"><div class="quick-icon orange-bg">›_</div><div><strong>Terminal controlado</strong><span>Execute diagnósticos seguros</span></div><b>↗</b></button>
+              <button class="quick-card" data-section-link="metrics"><div class="quick-icon green-bg">⌁</div><div><strong>Ver desempenho</strong><span>Acompanhe saúde e métricas</span></div><b>↗</b></button>
+            </div>
+
+            <div class="bottom-grid">
+              <article class="panel activity-panel">
+                <div class="panel-heading"><div><p class="eyebrow">ATIVIDADE</p><h3>Últimos eventos</h3></div><button class="kebab">•••</button></div>
+                <div id="activity-list" class="activity-list"><div class="empty-state compact">Nenhum evento registrado ainda.</div></div>
+              </article>
+              <article class="panel architecture-panel">
+                <div class="panel-heading"><div><p class="eyebrow">ARQUITETURA</p><h3>Seu fluxo local</h3></div><span class="mini-label">PRIVADO</span></div>
+                <div class="flow-diagram"><div class="flow-node"><span class="flow-icon">⌘</span><strong>Dashboard</strong><small>127.0.0.1</small></div><span class="flow-line"></span><div class="flow-node accent"><span class="flow-icon">✦</span><strong>llama-server</strong><small>API local :8080</small></div><span class="flow-line"></span><div class="flow-node"><span class="flow-icon">▤</span><strong>GGUF</strong><small>Seu disco</small></div></div>
+                <p class="panel-footnote"><span class="status-dot green"></span> Nenhum dado sai desta máquina por padrão.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="page-section" id="section-chat">
+            <div class="page-heading compact-heading"><div><p class="eyebrow">INFERÊNCIA LOCAL</p><h1>Chat <span>local.</span></h1><p class="heading-copy">Converse com seu modelo sem enviar dados para serviços externos.</p></div></div>
+            <div class="chat-layout">
+              <article class="panel chat-panel">
+                <div class="chat-toolbar"><div><span class="toolbar-label">MODELO ATIVO</span><select id="chat-model"><option value="">Padrão do servidor</option></select></div><div class="toolbar-status"><span class="status-dot" id="chat-status-dot"></span><span id="chat-status-text">Servidor não verificado</span></div></div>
+                <div id="chat-messages" class="chat-messages"><div class="welcome-message"><div class="welcome-mark">✦</div><h2>Pronto para pensar localmente.</h2><p>Escolha um modelo e envie uma mensagem para iniciar. A resposta será transmitida em tempo real.</p><div class="suggestion-row"><button data-prompt="Explique como escolher uma quantização GGUF para meu computador.">Quantização ideal</button><button data-prompt="Faça um diagnóstico básico de um servidor llama.cpp local.">Diagnóstico do servidor</button><button data-prompt="Crie um plano de estudos sobre IA local.">Plano de estudos</button></div></div></div>
+                <div class="chat-composer"><textarea id="chat-input" rows="2" placeholder="Escreva uma mensagem… (Enter para enviar, Shift+Enter para nova linha)"></textarea><div class="composer-footer"><div class="composer-left"><button class="text-button" id="open-knowledge">Anexos locais →</button><span class="privacy-label"><span class="status-dot green"></span> Processamento local</span></div><div class="composer-actions"><span id="char-count">0 / 250.000</span><button class="send-button" id="send-button">Enviar <span>↗</span></button></div></div></div>
+              </article>
+              <aside class="panel settings-panel"><div class="panel-heading"><div><p class="eyebrow">PARÂMETROS</p><h3>Geração</h3></div><span class="mini-label">LOCAL</span></div><label class="field-label">Temperatura <output id="temperature-value">0.70</output><input id="temperature" type="range" min="0" max="2" value="0.7" step="0.05" /></label><label class="field-label">Top P <output id="top-p-value">0.95</output><input id="top-p" type="range" min="0" max="1" value="0.95" step="0.05" /></label><label class="field-label">Máximo de tokens <output id="max-tokens-value">512</output><input id="max-tokens" type="range" min="64" max="8192" value="512" step="64" /></label><div class="divider"></div><div class="tip-box"><span>⌁</span><p><strong>Desempenho</strong> A velocidade depende da quantização, do contexto e do backend de hardware configurado no llama.cpp.</p></div><button class="secondary-button full" id="clear-chat">Limpar conversa</button></aside>
+            </div>
+          </section>
+
+          <section class="page-section" id="section-models">
+            <div class="page-heading compact-heading"><div><p class="eyebrow">CATÁLOGO LOCAL</p><h1>Seus <span>modelos.</span></h1><p class="heading-copy">Arquivos GGUF disponíveis no diretório configurado e modelos publicados pelo servidor.</p></div><button class="secondary-button" id="refresh-models">↻ Atualizar catálogo</button></div>
+            <div class="model-summary"><div class="summary-card"><span>Diretório monitorado</span><strong id="model-dir">—</strong></div><div class="summary-card"><span>Arquivos no disco</span><strong id="disk-model-count">0</strong></div><div class="summary-card"><span>Publicados na API</span><strong id="server-model-count">0</strong></div></div>
+            <article class="panel table-panel"><div class="panel-heading"><div><p class="eyebrow">GGUF</p><h3>Modelos detectados</h3></div><span class="mini-label" id="model-table-status">AGUARDANDO</span></div><div class="table-wrap"><table><thead><tr><th>Nome</th><th>Tamanho</th><th>Origem</th><th>Status</th><th></th></tr></thead><tbody id="models-table"><tr><td colspan="5"><div class="empty-state">Nenhum arquivo .gguf foi encontrado no diretório configurado.</div></td></tr></tbody></table></div></article>
+          </section>
+
+          <section class="page-section" id="section-metrics">
+            <div class="page-heading compact-heading"><div><p class="eyebrow">OBSERVABILIDADE</p><h1>Métricas <span>locais.</span></h1><p class="heading-copy">Saúde do serviço e indicadores expostos pelo llama.cpp.</p></div><button class="secondary-button" id="refresh-metrics">↻ Atualizar métricas</button></div>
+            <div class="metrics-grid"><div class="metric-card"><span class="metric-label">Estado do servidor</span><strong id="metric-state">—</strong><small id="metric-state-detail">—</small></div><div class="metric-card"><span class="metric-label">Latência de saúde</span><strong id="metric-latency">—</strong><small>última verificação</small></div><div class="metric-card"><span class="metric-label">Modelos no disco</span><strong id="metric-models">0</strong><small>arquivos GGUF</small></div><div class="metric-card"><span class="metric-label">Terminal</span><strong id="metric-terminal">—</strong><small>modo allowlist</small></div></div>
+            <article class="panel metrics-panel"><div class="panel-heading"><div><p class="eyebrow">PROMETHEUS</p><h3>Métricas brutas do llama.cpp</h3></div><span class="mini-label" id="metrics-availability">NÃO DISPONÍVEL</span></div><pre id="metrics-output" class="metrics-output">Clique em “Atualizar métricas” para consultar /metrics.</pre></article>
+          </section>
+
+          <section class="page-section" id="section-knowledge">
+            <div class="page-heading compact-heading"><div><p class="eyebrow">CONHECIMENTO LOCAL</p><h1>Arquivos <span>&amp; Obsidian.</span></h1><p class="heading-copy">Carregue documentos para análise local e conecte o modelo ao seu vault Markdown sem mover os arquivos originais.</p></div></div>
+            <div class="knowledge-grid">
+              <article class="panel files-panel"><div class="panel-heading"><div><p class="eyebrow">INGESTÃO</p><h3>Arquivos para análise</h3></div><span class="mini-label" id="files-count-label">0 ARQUIVOS</span></div><div class="upload-zone"><div class="upload-symbol">↑</div><strong>Solte arquivos aqui</strong><span>ou selecione PDFs, documentos, imagens, planilhas, código e outros formatos</span><input id="file-input" type="file" multiple /><button class="secondary-button" id="upload-files">Selecionar arquivos</button></div><p class="panel-footnote"><span class="status-dot green"></span> Armazenamento local · limite por arquivo: <span id="upload-limit">—</span></p><div id="file-list" class="file-list"><div class="empty-state compact">Nenhum arquivo carregado. Os originais permanecem na área local de ingestão.</div></div></article>
+              <article class="panel obsidian-panel"><div class="panel-heading"><div><p class="eyebrow">VAULT MARKDOWN</p><h3>Obsidian</h3></div><span class="mini-label" id="obsidian-status-label">NÃO CONFIGURADO</span></div><div class="obsidian-path" id="obsidian-path">Defina OBSIDIAN_VAULT_DIR no arquivo .env para conectar seu vault.</div><div class="obsidian-toolbar"><input id="obsidian-search" type="search" placeholder="Pesquisar notas…" /><button class="tiny-button" id="refresh-obsidian">↻</button></div><div id="obsidian-notes" class="obsidian-notes"><div class="empty-state compact">Nenhuma nota disponível.</div></div><div class="note-editor"><div class="editor-heading"><span id="selected-note-label">Nenhuma nota selecionada</span><button class="tiny-button" id="save-note" disabled>Salvar nota</button></div><textarea id="note-content" placeholder="Selecione uma nota do vault para editar…" disabled></textarea></div></article>
+            </div>
+            <div class="knowledge-note"><span>✦</span><p><strong>Como o chat usa os arquivos:</strong> marque os documentos desejados na lista e volte ao Chat local. O conteúdo extraível será enviado somente ao llama.cpp local como contexto de referência; instruções encontradas dentro dos arquivos serão tratadas como dados, não como comandos.</p></div>
+          </section>
+
+          <section class="page-section" id="section-web">
+            <div class="page-heading compact-heading"><div><p class="eyebrow">PESQUISA EXTERNA OPCIONAL</p><h1>Pesquisa <span>web.</span></h1><p class="heading-copy">Consulte fontes atuais com Tavily sem expor sua chave ao navegador ou ao modelo local.</p></div></div>
+            <div class="web-search-layout">
+              <article class="panel search-panel">
+                <div class="panel-heading"><div><p class="eyebrow">TAVILY SEARCH</p><h3>Nova busca</h3></div><span class="mini-label" id="tavily-status-label">DESABILITADA</span></div>
+                <label class="search-field-label" for="tavily-query">Consulta</label>
+                <textarea id="tavily-query" rows="3" placeholder="Ex.: práticas de Vulkan e multi-GPU no llama.cpp…"></textarea>
+                <div class="search-options"><label>Profundidade<select id="tavily-depth"><option value="basic">Basic · 1 crédito</option><option value="fast">Fast · 1 crédito</option><option value="ultra-fast">Ultra-fast · 1 crédito</option><option value="advanced">Advanced · 2 créditos</option></select></label><label>Tópico<select id="tavily-topic"><option value="general">Geral</option><option value="news">Notícias</option><option value="finance">Finanças</option></select></label></div>
+                <label class="search-check"><input id="tavily-answer" type="checkbox" /> Solicitar resposta resumida da Tavily</label>
+                <div class="search-submit-row"><span id="tavily-usage-note">Aguardando configuração</span><button class="primary-button" id="run-tavily-search">Pesquisar <span>↗</span></button></div>
+              </article>
+              <aside class="panel web-info-panel"><div class="web-info-mark">◎</div><h3>Controle local da chave</h3><p>A chave fica em <code>TAVILY_API_KEY</code> no `.env` e só o backend faz a requisição. O navegador recebe apenas títulos, URLs, trechos e metadados de uso.</p><div class="web-info-row"><span>Cache local</span><strong>900 s</strong></div><div class="web-info-row"><span>Limite padrão</span><strong>5 fontes</strong></div><div class="web-info-row"><span>Plano gratuito</span><strong>1.000 créditos/mês</strong></div><p class="panel-footnote"><span class="status-dot amber"></span> A busca web é opcional e permanece desabilitada até você configurar e ativar a chave.</p></aside>
+            </div>
+            <article class="panel tavily-results-panel"><div class="panel-heading"><div><p class="eyebrow">FONTES RETORNADAS</p><h3>Resultados</h3></div><span class="mini-label" id="tavily-result-meta">NENHUMA BUSCA</span></div><div id="tavily-results" class="tavily-results"><div class="empty-state">Execute uma pesquisa para ver fontes atuais.</div></div></article>
+          </section>
+
+          <section class="page-section" id="section-terminal">
+            <div class="page-heading compact-heading"><div><p class="eyebrow">DIAGNÓSTICO CONTROLADO</p><h1>Terminal <span>seguro.</span></h1><p class="heading-copy">Comandos de leitura pré-aprovados para inspecionar a máquina sem abrir um shell irrestrito.</p></div></div>
+            <div class="terminal-layout"><article class="panel terminal-panel"><div class="terminal-header"><div><span class="terminal-title-dot"></span><span>diagnóstico local</span></div><span class="mini-label" id="terminal-mode-label">ALLOWLIST</span></div><div id="terminal-output" class="terminal-output"><div class="terminal-line muted"># O terminal está desabilitado por padrão.</div><div class="terminal-line muted"># Ative TERMINAL_ENABLED=true no arquivo .env para usar comandos permitidos.</div></div><div class="terminal-form"><span class="prompt">$</span><input id="terminal-input" type="text" placeholder="pwd, ls -lah, free -h, df -h…" autocomplete="off" /><button class="send-button" id="run-terminal">Executar</button></div></article><aside class="panel warning-panel"><div class="warning-icon">!</div><h3>Limites de segurança</h3><p>O modo padrão aceita somente comandos simples de leitura. Não há shell, sudo, redirecionamento, pipes ou execução encadeada.</p><div class="allowed-list"><span>Comandos disponíveis</span><code>pwd</code><code>ls -lah</code><code>df -h</code><code>free -h</code><code>nproc</code><code>uname -a</code><code>llama-server --version</code><code>vulkaninfo --summary</code><code>lspci -k</code></div><p class="panel-footnote"><span class="status-dot amber"></span> Não é um sandbox forte. Use uma conta Linux dedicada para tarefas não confiáveis.</p></aside></div>
+          </section>
+
+          <section class="page-section" id="section-settings">
+            <div class="page-heading compact-heading"><div><p class="eyebrow">CONFIGURAÇÃO</p><h1>Preferências <span>locais.</span></h1><p class="heading-copy">Valores somente para leitura nesta primeira versão; altere o arquivo .env e reinicie o serviço.</p></div></div>
+            <article class="panel config-panel"><div class="panel-heading"><div><p class="eyebrow">RUNTIME</p><h3>Configuração carregada</h3></div><span class="mini-label">.ENV</span></div><div id="config-grid" class="config-grid"></div><div class="config-help"><strong>Como alterar</strong><p>Copie <code>.env.example</code> para <code>.env</code>, ajuste os valores e reinicie o serviço com <code>systemctl --user restart llama-dashboard</code>.</p><button class="secondary-button" id="logout-button" hidden>Sair da sessão remota</button></div></article>
+          </section>
+        </div>
+      </main>
+    </div>
+    <div id="toast" class="toast" role="status"></div>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

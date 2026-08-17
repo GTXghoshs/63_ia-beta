@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=63_ia (beta)
+Comment=Ambiente Linux local para llama.cpp, modelos GGUF e desenvolvimento assistido
+Exec=%h/63_ia-beta/bin/llama-dashboard-open
+Icon=utilities-terminal
+Terminal=false
+Categories=Development;Utility;System;
+StartupNotify=true

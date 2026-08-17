@@ -1,0 +1,40 @@
+# Segredos e configuração local
+.env
+.env.*
+!.env.example
+
+# Ambientes e caches Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+qa-results.xml
+
+
+# Dados gerados localmente
+data/audit.jsonl
+data/tavily_cache.json
+data/uploads/*
+!data/uploads/.gitkeep
+models/*
+!models/.gitkeep
+
+# Artefatos de mídia/demonstração
+*.mp4
+video_assets/
+app_demo_assets/
+video_prepare.py
+create_app_demo_frames.py
+build_demo_video.sh
+build_app_demo_video.sh
+
+# Sistema/editor
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Relatórios temporários de diagnóstico
+*.diagnose.txt

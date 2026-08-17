@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ENV_FILE="$PROJECT_DIR/.env"
+HOST="127.0.0.1"
+PORT="8090"
+
+if [[ -f "$ENV_FILE" ]]; then
+  while IFS='=' read -r key value; do
+    value="${value%$'\r'}"
+    case "$key" in
+      DASHBOARD_HOST) HOST="${value#\"}"; HOST="${HOST%\"}"; HOST="${HOST#\'}"; HOST="${HOST%\'}" ;;
+      DASHBOARD_PORT) PORT="${value#\"}"; PORT="${PORT%\"}"; PORT="${PORT#\'}"; PORT="${PORT%\'}" ;;
+    esac
+  done < <(grep -E '^(DASHBOARD_HOST|DASHBOARD_PORT)=' "$ENV_FILE" || true)
+fi
+
+if [[ ! "$PORT" =~ ^[0-9]{4,5}$ ]]; then
+  echo "DASHBOARD_PORT inválido: $PORT" >&2
+  exit 2
+fi
+
+cd "$PROJECT_DIR"
+exec "$PROJECT_DIR/.venv/bin/uvicorn" app.main:app --host "$HOST" --port "$PORT"

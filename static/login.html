@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101827" />
+    <title>Acesso · 63_ia (beta)</title>
+    <link rel="stylesheet" href="/static/login.css" />
+  </head>
+  <body>
+    <main class="login-shell">
+      <section class="login-card" aria-labelledby="login-title">
+        <div class="brand-mark"><span></span><span></span><span></span></div>
+        <p class="eyebrow">ACESSO REMOTO PROTEGIDO</p>
+        <h1 id="login-title">63_ia <em>beta.</em></h1>
+        <p class="login-copy">O dashboard está disponível nesta máquina. Informe o token definido em <code>REMOTE_ACCESS_TOKEN</code>.</p>
+        <form id="login-form">
+          <label for="access-token">Token de acesso</label>
+          <input id="access-token" type="password" autocomplete="current-password" required placeholder="Cole o token local" />
+          <button type="submit" id="login-button">Entrar <span>↗</span></button>
+          <p id="login-error" class="login-error" role="alert"></p>
+        </form>
+        <div class="login-foot"><span class="status-dot"></span><span>Conexão protegida por sessão HttpOnly</span></div>
+      </section>
+    </main>
+    <script src="/static/login.js"></script>
+  </body>
+</html>

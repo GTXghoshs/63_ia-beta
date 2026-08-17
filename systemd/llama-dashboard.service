@@ -1,0 +1,23 @@
+[Unit]
+Description=63_ia (beta) local AI dashboard
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/63_ia-beta
+EnvironmentFile=-%h/63_ia-beta/.env
+ExecStart=%h/63_ia-beta/bin/llama-dashboard-server
+Restart=on-failure
+RestartSec=3
+TimeoutStartSec=30
+UMask=0077
+LimitNOFILE=8192
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=read-only
+ReadWritePaths=%h/63_ia-beta/data
+
+[Install]
+WantedBy=default.target
