@@ -47,44 +47,38 @@ cd /caminho/para/63_ia-beta
 
 O instalador cria o ambiente Python do dashboard, instala dependências, copia o serviço systemd de usuário e registra o lançador do aplicativo. A execução do modelo permanece separada.
 
-## 5. Criar o `.env`
+## 5. Configurar durante a instalação
+
+O instalador pergunta os caminhos essenciais e grava o `.env` automaticamente. Não é necessário abrir `nano` ou editar o arquivo manualmente:
 
 ```bash
-cp .env.example .env
-nano .env
+./install-fedora.sh
 ```
 
-Configuração CPU:
+Durante a execução, informe:
 
-```dotenv
-LLAMA_SERVER_BIN=/caminho/para/llama.cpp/build/bin/llama-server
-LLAMA_BASE_URL=http://127.0.0.1:8080
-LLAMA_BACKEND=cpu
-LLAMA_MODEL_PATH=/home/seu-usuario/Models/modelo.gguf
-LLAMA_CONTEXT_SIZE=8192
-LLAMA_N_GPU_LAYERS=0
-LLAMA_SPLIT_MODE=none
+| Pergunta | Valor recomendado |
+|---|---|
+| Diretório dos modelos GGUF | A pasta que contém os modelos locais, por exemplo `~/llama.cpp/models` |
+| Caminho do vault do Obsidian | A pasta do vault; pressione Enter para deixar desativado |
+
+O instalador cria o `.env` com permissões restritas, configura `WORK_DIR`, `AUDIT_LOG`, `MODEL_DIR` e `OBSIDIAN_VAULT_DIR`, cria o serviço systemd e configura a permissão do vault informado. Em uma reinstalação, os valores existentes aparecem como padrão.
+
+O diretório pode conter vários modelos GGUF. O modelo efetivamente servido continua sendo escolhido no comando `scripts/start-llama-linux.sh`, sem necessidade de editar o `.env`:
+
+```bash
+./scripts/start-llama-linux.sh \
+  "$HOME/llama.cpp/models/SEU_MODELO.gguf"
 ```
 
-Configuração Vulkan:
-
-```dotenv
-LLAMA_SERVER_BIN=/caminho/para/llama.cpp/build/bin/llama-server
-LLAMA_BASE_URL=http://127.0.0.1:8080
-LLAMA_BACKEND=vulkan
-LLAMA_MODEL_PATH=/home/seu-usuario/Models/modelo.gguf
-LLAMA_CONTEXT_SIZE=16384
-LLAMA_N_GPU_LAYERS=999
-LLAMA_SPLIT_MODE=layer
-```
-
-Não preencha Tavily, Obsidian ou acesso remoto até que o dashboard básico esteja funcionando.
+Para CPU, configure o backend no perfil do launcher ou use `LLAMA_BACKEND=cpu` no ambiente do comando. Para Vulkan e múltiplas GPUs, use o launcher genérico e os parâmetros documentados em `README.md` e `docs/TROUBLESHOOTING.md`.
 
 ## 6. Validar dispositivos e iniciar o modelo
 
 ```bash
 ./scripts/list-llama-devices.sh
-./scripts/start-llama-linux.sh "$LLAMA_MODEL_PATH"
+./scripts/start-llama-linux.sh \
+  "$HOME/llama.cpp/models/SEU_MODELO.gguf"
 ```
 
 Em outra sessão:

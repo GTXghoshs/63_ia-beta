@@ -584,6 +584,10 @@ def stream_llama(payload: dict[str, Any]) -> Generator[str, None, None]:
             stream=True,
             timeout=(3, 600),
         ) as response:
+            # llama-server normalmente envia JSON/SSE em UTF-8, mas pode omitir
+            # o charset. Sem esta atribuição, requests pode decodificar bytes UTF-8
+            # como ISO-8859-1 e produzir texto como "Ã©" no chat.
+            response.encoding = "utf-8"
             if response.status_code >= 400:
                 detail = response.text[:4000]
                 yield sse("error", {"message": f"llama.cpp respondeu HTTP {response.status_code}", "detail": detail})
@@ -605,11 +609,10 @@ def stream_llama(payload: dict[str, Any]) -> Generator[str, None, None]:
                 if choices:
                     delta = choices[0].get("delta") or {}
                     text = delta.get("content") or ""
-                    reasoning = delta.get("reasoning_content") or ""
+                    # reasoning_content é metadado interno do modelo. Não o envie
+                    # ao navegador: somente o conteúdo final deve aparecer no chat.
                     if text:
                         yield sse("delta", {"text": text})
-                    if reasoning:
-                        yield sse("reasoning", {"text": reasoning})
                 if chunk.get("timings") or chunk.get("usage"):
                     yield sse("stats", {"timings": chunk.get("timings"), "usage": chunk.get("usage")})
             yield sse("done", {"ok": True})

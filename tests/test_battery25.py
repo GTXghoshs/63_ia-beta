@@ -26,8 +26,9 @@ class FakeStreamingResponse:
         return False
 
     def iter_lines(self, decode_unicode=True):
-        yield json.dumps({"choices": [{"delta": {"content": "Olá local"}}]})
-        yield json.dumps({"usage": {"prompt_tokens": 4, "completion_tokens": 2}})
+        yield json.dumps({"choices": [{"delta": {"reasoning_content": "não deve aparecer"}}]}, ensure_ascii=False)
+        yield json.dumps({"choices": [{"delta": {"content": "Olá, código local"}}]}, ensure_ascii=False)
+        yield json.dumps({"usage": {"prompt_tokens": 4, "completion_tokens": 2}}, ensure_ascii=False)
         yield "data: [DONE]"
 
 
@@ -124,6 +125,9 @@ def test_11_chat_stream_success(monkeypatch):
     response = client.post("/api/chat/stream", json={"messages": [{"role": "user", "content": "oi"}]})
     assert response.status_code == 200
     assert "event: delta" in response.text
+    assert "Olá, código local" in response.text
+    assert "event: reasoning" not in response.text
+    assert "não deve aparecer" not in response.text
     assert "event: done" in response.text
     assert calls[0][0].endswith("/v1/chat/completions")
 

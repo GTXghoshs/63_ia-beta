@@ -58,23 +58,20 @@ O terminal segue um caminho separado: a requisição passa pela allowlist, valid
 
 ## Instalação rápida no Fedora
 
-A instalação não usa Docker. Primeiro instale ferramentas do sistema, clone ou extraia o projeto e configure um `.env` local:
+A instalação não usa Docker. Primeiro instale ferramentas do sistema, clone ou extraia o projeto e execute o instalador guiado:
 
 ```bash
 sudo dnf install -y python3 python3-pip python3-devel gcc-c++ cmake make git openssl-devel pciutils vulkan-tools mesa-vulkan-drivers poppler-utils curl xdg-utils unzip
 
 git clone https://github.com/SEU_USUARIO/63_ia-beta.git
 cd 63_ia-beta
-cp .env.example .env
-nano .env
-
 ./scripts/install-fedora-deps.sh
 ./install-fedora.sh
 systemctl --user enable --now llama-dashboard.service
 ./bin/llama-dashboard-open
 ```
 
-O serviço abre em `http://127.0.0.1:8090`. A configuração padrão mantém o dashboard e o llama-server em loopback, desabilita o terminal e não ativa Tavily.
+Durante `./install-fedora.sh`, informe o diretório que contém os modelos GGUF e, opcionalmente, o caminho do vault do Obsidian. O instalador cria o `.env`, configura `MODEL_DIR` e `OBSIDIAN_VAULT_DIR`, protege o arquivo e prepara o serviço. Não é necessário abrir um editor para os caminhos básicos. O serviço abre em `http://127.0.0.1:8090`; a configuração padrão mantém dashboard e llama-server em loopback, desabilita o terminal e não ativa Tavily.
 
 Para Linux não-Fedora, instale manualmente Python 3, `python3-venv`, compilador, CMake, `curl`, ferramentas Vulkan/Mesa quando aplicável e `poppler-utils`. O script `install-fedora-deps.sh` é específico do DNF e não deve ser executado em Debian, Ubuntu, Arch ou outras distribuições sem adaptação.
 
@@ -101,13 +98,13 @@ llama-server --version
 
 ## Configuração local
 
-No `.env`, defina o modelo GGUF e o perfil de execução:
+O instalador já configura `MODEL_DIR` e, opcionalmente, `OBSIDIAN_VAULT_DIR`. O arquivo `.env` não precisa ser editado para os caminhos básicos. Os parâmetros abaixo são ajustes avançados opcionais para o perfil de execução e múltiplas GPUs:
 
 ```dotenv
 LLAMA_BASE_URL=http://127.0.0.1:8080
 LLAMA_CPP_ONLY=true
 LLAMA_BACKEND=vulkan
-LLAMA_MODEL_PATH=/home/seu-usuario/Models/seu-modelo.gguf
+# O modelo ativo é informado ao iniciar scripts/start-llama-linux.sh
 LLAMA_MODEL_ALIAS=63-ia-local
 LLAMA_CONTEXT_SIZE=16384
 LLAMA_N_GPU_LAYERS=999
@@ -117,7 +114,7 @@ LLAMA_TENSOR_SPLIT=
 LLAMA_SPLIT_MODE=layer
 ```
 
-A variável `LLAMA_BASE_URL` deve permanecer em loopback. O backend público rejeita endpoints remotos para impedir que o projeto seja apontado para um provedor de modelo externo.
+A variável `LLAMA_BASE_URL` deve permanecer em loopback. O backend público rejeita endpoints remotos para impedir que o projeto seja apontado para um provedor de modelo externo. Para trocar o modelo ativo, informe um arquivo `.gguf` ao launcher; não é necessário alterar `MODEL_DIR` ou editar o `.env`.
 
 ## Instalação de múltiplos modelos locais
 

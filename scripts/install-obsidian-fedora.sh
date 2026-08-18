@@ -12,6 +12,6 @@ flatpak --user install -y flathub md.obsidian.Obsidian
 cat <<'EOF'
 
 Obsidian instalado via Flatpak.
-Abra o Obsidian, escolha ou crie seu vault e depois defina o caminho absoluto em OBSIDIAN_VAULT_DIR no arquivo .env do dashboard.
+Abra o Obsidian, escolha ou crie seu vault e execute ./install-fedora.sh; o instalador perguntará o caminho do vault e o salvará automaticamente.
 Plugins da comunidade não são instalados automaticamente; instale somente os que você revisar e realmente precisar.
 EOF

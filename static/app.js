@@ -368,7 +368,7 @@ async function sendChat() {
     if (!response.ok) throw new Error((await response.json().catch(() => ({}))).detail || `Falha HTTP ${response.status}`);
     if (!response.body) throw new Error("O navegador não recebeu um stream de resposta.");
     const reader = response.body.getReader();
-    const decoder = new TextDecoder();
+    const decoder = new TextDecoder("utf-8");
     let buffer = "";
     let answer = "";
     while (true) {
@@ -384,7 +384,8 @@ async function sendChat() {
         const data = JSON.parse(dataLine.slice(5).trim());
         const eventName = eventLine ? eventLine.slice(6).trim() : "message";
         if (eventName === "delta") { answer += data.text || ""; assistantBody.textContent = answer; $("#chat-messages").scrollTop = $("#chat-messages").scrollHeight; }
-        if (eventName === "reasoning" && !answer) assistantBody.textContent = `[raciocínio] ${data.text || ""}`;
+        // O backend não encaminha reasoning_content: somente conteúdo final
+        // deve aparecer na resposta persistida e na interface.
         if (eventName === "error") throw new Error(data.message || data.detail || "Falha na inferência local");
       }
     }
